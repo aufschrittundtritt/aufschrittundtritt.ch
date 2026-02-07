@@ -1,0 +1,24 @@
+---
+import MainI18n from "@components/MainI18n.astro";
+
+import FaqP from "@components/Faq.jsx";
+import getQuestions from "@src/utilities/getQuestions";
+import { getUniqueTags } from "@src/utilities/tags";
+
+const { frontmatter } = Astro.props,
+	title = frontmatter.title;
+
+const questions = await getQuestions(Astro.currentLocale, "faq");
+const tags = await getUniqueTags("faq", Astro.currentLocale);
+
+const localTags = tags.filter(t => {
+	return true;
+})
+---
+
+<MainI18n {frontmatter} collection="pages">
+	<section class="page-content page-faq flex px-6 border-black h-fit">
+		<slot />
+	</section>
+	<FaqP locale={Astro.currentLocale} {questions} {tags} client:load />
+</MainI18n>

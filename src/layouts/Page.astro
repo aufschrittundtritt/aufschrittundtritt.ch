@@ -1,0 +1,16 @@
+---
+import MainI18n from "@components/MainI18n.astro";
+import type { CommonFrontmatter } from "@src/types";
+interface Props {
+	frontmatter: CommonFrontmatter;
+}
+
+const { frontmatter } = Astro.props,
+	title = frontmatter?.title || "";
+---
+
+<MainI18n {frontmatter} collection="pages">
+	<section class="page-content">
+		<slot />
+	</section>
+</MainI18n>

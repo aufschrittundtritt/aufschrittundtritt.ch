@@ -1,0 +1,103 @@
+@font-face {
+    font-family: 'vg5000';
+    src: url('VG5000-Regular_web.eot');
+    src: url('VG5000-Regular_web.eot?#iefix') format('embedded-opentype'),
+        url('VG5000-Regular_web.woff') format('woff'),
+        url('VG5000-Regular_web.woff2') format('woff2'),
+        url('VG5000-Regular_web.ttf') format('truetype'),
+        url('VG5000-Regular_web.svg#svgFontName') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'literata';
+    src: url('Literata-Regular.ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'literata';
+    src: url('Literata-Italic.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+
+@layer theme {
+    :where(a, h1, h2, h3, h4, h5, input) {
+        font-family: vg5000 !important;
+    }
+
+    p {
+        @apply !text-base text-black dark:text-white;
+        font-family: literata;
+        text-indent: 2rem;
+    }
+
+        p em strong {
+        @apply !text-base !bg-black !text-white dark:!bg-white dark:!text-black not-italic;
+    }
+
+    article a {
+        @apply !text-blue-600 dark:!text-blue-400 !underline;
+    }
+
+    article p a::before {
+        content: '↗ ';
+    }
+
+    .description {
+        @apply group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black;
+        text-indent: 0 !important;
+    }
+
+    blockquote {
+        @apply bg-black flex gap-1 !p-4 max-w-[100%];
+    }
+
+    blockquote p {
+        @apply !text-white block italic;
+    }
+
+    blockquote::before {
+        font-family: vg5000;
+        content: open-quote;
+        @apply text-7xl text-white h-full;
+    }
+
+    h1 {
+        @apply !text-4xl w-full md:w-fit md:!pr-24 text-white dark:text-black !pl-1 !bg-black dark:!bg-white;
+    }
+
+    article h1 {
+        @apply !mb-2;
+    }
+
+    h2 {
+        @apply !text-3xl italic group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black;
+    }
+
+    h3 {
+        @apply !text-3xl text-white dark:text-black italic;
+    }
+
+    h4 {
+        @apply !text-4xl md:!text-lg italic hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black dark:hover:border-white;
+    }
+
+    h5 {
+        @apply select-none !text-base;
+    }
+
+    input {
+        @apply !text-lg !lowercase !italic;
+    }
+
+    .text-balance {
+        hyphens: auto;
+        text-wrap: balance;
+    }
+
+}

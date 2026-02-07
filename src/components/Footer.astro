@@ -1,0 +1,43 @@
+---
+import { defaultLocale, fallback } from "@i18n/i18n";
+import HeaderLink from "./HeaderLink.astro";
+import { headerMenu } from "@src/header";
+import type { navigationItem } from "@src/header";
+import type { TranslationLink } from './MainI18n.astro';
+
+// If no items are available for the page's locale, the items for the defaultLocale will be used:
+const menuLocale: string = headerMenu[Astro.currentLocale]
+  ? Astro.currentLocale
+  : fallback[Astro.currentLocale] || defaultLocale;
+const headerMenuItems: navigationItem[] = headerMenu[menuLocale].items;
+
+const translationLinks = Astro.props.translationLinks ?? [];
+---
+
+<footer class="absolute -bottom-24 flex flex-col items-center justify-start w-full h-34 border-t-4 dark:bg-black border-black dark:border-white">
+  <div class="flex gap-2 h-9 items-center p-1 text-sm">
+{
+  //translationLinks.map((translation, index) => (
+	//	<a class="button"
+	//	 href={translation.relativeURL} hreflang={translation.locale}>
+	//		{translation.label}
+	//	</a></>
+  //  ))
+  <a class="button">
+		<h5>de</h5>
+	</a></>
+}
+</div>
+ <nav class="px-4 py-1 flex justify-center w-full">
+    <ul class="header__list flex flex-col items-center">
+      {
+        headerMenuItems.map((item) => (
+          <HeaderLink href={item.path}>{item.label}</HeaderLink>
+        ))
+      }
+	  <li><a href="/imprint" class="italic text-blue-600 dark:text-blue-400 underline">imprint</a></li>
+	  <li><a href="/rss" class="italic text-blue-600 dark:text-blue-400 underline">rss</a></li>
+	  <li class="text-sm mt-2  text-black dark:text-white">© 2025 Verein as&t</li>
+    </ul>
+</nav>
+</footer>

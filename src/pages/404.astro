@@ -1,0 +1,17 @@
+---
+import Header from "@components/Header.astro";
+import Html from "@components/Html.astro";
+import { uiStrings } from "@i18n/uiStrings";
+const title = uiStrings.pageNotFoundHeading[Astro.currentLocale]
+---
+
+<Html frontmatter={{ title, description: title }}>
+  <Header />
+  <main id="main">
+    <section class="page-content page-404">
+        <h1 lang={Astro.currentLocale}>{uiStrings.pageNotFoundHeading[Astro.currentLocale]}</h1>
+        <p lang={Astro.currentLocale}>{uiStrings.pageNotFoundBody[Astro.currentLocale]}</p>
+      <slot />
+    </section>
+  </main>
+</Html>

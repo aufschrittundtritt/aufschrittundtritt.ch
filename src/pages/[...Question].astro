@@ -1,0 +1,43 @@
+---
+import { type CollectionEntry } from "astro:content";
+import { locales } from "@i18n/i18n";
+import { getLocaleFromUrl } from "@i18n/utilities";
+import Question from "@layouts/Question.astro";
+import { getQuestionPath } from "@src/utilities/getQuestionPath";
+import getQuestions from "@src/utilities/getQuestions";
+import { getQuestionDescription } from "@utilities/getPageDescription";
+
+export async function getStaticPaths() {
+	const collection = "faq";
+	const faq = await getQuestions("", collection, "");
+	let questionsToRender = [];
+
+	for (let locale of locales) {
+		const f_faq = faq.filter(function (entry) {
+			return getLocaleFromUrl(entry.slug) === locale;
+		});
+
+		const localeQs = f_faq.map((question, i) => ({
+			params: {
+				Question: `${getQuestionPath(locale, collection, question.slug, false)}`,
+			},
+			props: {
+				question,
+				prev_question: f_faq[(i - 1 + f_faq.length) % f_faq.length],
+				next_question: f_faq[(i + 1) % f_faq.length],
+			},
+		}));
+		questionsToRender.push(...localeQs);
+	}
+	return questionsToRender;
+}
+type Props = CollectionEntry<"faq">;
+
+const { question, prev_question, next_question } = Astro.props as any;
+const { Content } = await question.render();
+question.data.description = getQuestionDescription(question);
+---
+
+<Question {...question.data} {prev_question} {next_question}>
+	<Content />
+</Question>
