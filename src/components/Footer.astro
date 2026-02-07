@@ -1,6 +1,5 @@
 ---
 import { defaultLocale, fallback } from "@i18n/i18n";
-import HeaderLink from "./HeaderLink.astro";
 import { headerMenu } from "@src/header";
 import type { navigationItem } from "@src/header";
 import type { TranslationLink } from './MainI18n.astro';
@@ -30,11 +29,6 @@ const translationLinks = Astro.props.translationLinks ?? [];
 </div>
  <nav class="px-4 py-1 flex justify-center w-full">
     <ul class="header__list flex flex-col items-center">
-      {
-        headerMenuItems.map((item) => (
-          <HeaderLink href={item.path}>{item.label}</HeaderLink>
-        ))
-      }
 	  <li><a href="/imprint" class="italic text-blue-600 dark:text-blue-400 underline">imprint</a></li>
 	  <li><a href="/rss" class="italic text-blue-600 dark:text-blue-400 underline">rss</a></li>
 	  <li class="text-sm mt-2  text-black dark:text-white">© 2025 Verein as&t</li>
