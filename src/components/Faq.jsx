@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
-import { getQuestionPath } from '@src/utilities/getQuestionPath';
+import { getAbsoluteQuestionPath } from '@src/utilities/getQuestionPath';
 import { getQuestionDescription } from '@utilities/getPageDescription';
 import { uiStrings } from "@i18n/uiStrings";
 import Tags from './Tags.jsx';
@@ -68,7 +68,7 @@ const Faq = (props) => {
             <ul class="faq flex flex-col bg-black dark:bg-white gap-0.5 !py-1 !pt-10 md:!pt-0">
                 {filteredQuestions.sort((q_a, q_b) => (q_a.data.position - q_b.data.position)).map((question, index) => (
                     <li class="group faq md:min-w-128 pb-4 px-6 md:px-10 flex flex-col p-2 bg-white dark:bg-black dark:text-white w-full lg:flex-1 " key={question.slug}>
-                        <a href={getQuestionPath(locale, 'faq', question.slug)}>
+                        <a href={getAbsoluteQuestionPath(locale, 'faq', question.slug)}>
                             <h2 class="text-balance lg:max-w-[70%]">{question.data.title}</h2>
                             <p class="description lg:max-w-[50%]">{getQuestionDescription(question)}</p>
                         </a>

@@ -1,7 +1,7 @@
 import getPagePath from '@utilities/getPagePath'
 import { collectionDirectoryNames } from '@i18n/i18n';
 import { locales } from '@i18n/i18n';
-import { site } from '@src/consts'
+import { site, base } from '@src/consts'
 
 export function getQuestionPath(locale: string, collection: string, slug: string, addLeadingSlash: boolean = true): string {
 	const
